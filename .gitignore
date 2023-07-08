@@ -1,3 +1,4 @@
+
 # Uncomment these types if you want even more clean repository. But be careful.
 # It can make harm to an existing project source. Read explanations below.
 #
@@ -60,7 +61,62 @@
 # Delphi history and backups
 __history/
 __recovery/
-*.~*
+using namespace std;
+int main()
+{
+  unit MainU;
+ 
+interface
+ 
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, DBCtrls, DB, Grids, DBGrids, DBClient;
+ 
+type
+  TForm1 = class(TForm)
+    ClientDataSet1: TClientDataSet;
+    DBGrid1: TDBGrid;
+    DataSource1: TDataSource;
+    DBNavigator1: TDBNavigator;
+    Button1: TButton;
+    ClientDataSet1F1: TFloatField;
+    ClientDataSet1F2: TFloatField;
+    ClientDataSet1F3: TFloatField;
+    procedure Button1Click(Sender: TObject);
+    procedure ClientDataSet1CalcFields(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+ 
+var
+  Form1: TForm1;
+qf1,qf2:extended;
+implementation
+ 
+{$R *.dfm}
+ 
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+close;
+end;
+ 
+procedure TForm1.ClientDataSet1CalcFields(DataSet: TDataSet);
+begin
+with dataset do
+begin
+if (RecNo>1)and(fieldbyname('F1').Value<>null)and(fieldbyname('F2').Value<>null)and(qf1<>0)and(qf2<>0) then
+FieldByName('F3').Value:=(fieldbyname('F1').Value/qf1)*(fieldbyname('F2').Value/qf2);
+if fieldbyname('F1').Value<>null then
+qf1:=fieldbyname('F1').Value;
+if fieldbyname('F2').Value<>null then
+qf2:=fieldbyname('F2').Value;
+end;
+end;
+ 
+end.char s[80];
+
 
 # Castalia statistics file (since XE7 Castalia is distributed with Delphi)
 *.stat
